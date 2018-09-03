@@ -1,24 +1,5 @@
 #include "get_next_line.h"
 
-int main(int argc, char **argv)
-{
-	char *str;
-	int ret;
-	int fd;
-
-	str = NULL;
-  fd = open(argv[1], O_RDONLY);
-
-  while (get_next_line(fd, &str) != 0)
-		{
-			printf("\n[%s]\n", str);
-			free(str);
-		}
-
-  ft_putstr("\nEND OF FILE\n");
-	return (0);
-}
-
 int		reset_stock(char **line, char **stock)
 {
 	*line = *stock;
