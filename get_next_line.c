@@ -48,7 +48,7 @@ int		get_next_line(const int fd, char **line)
 	while ((ret = read(fd, buf, BUFF_SIZE)) > 0)
 	{
 		buf[ret] = '\0';
-		stock = ft_strjoinf(stock, buf);
+		stock = ft_strjoinfree(stock, buf);
 		if (check_n(stock) != -1)
 			return (clean_stock(line, &stock));
 	}

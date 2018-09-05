@@ -1,23 +1,4 @@
-#include "get_next_line.h"
-
-int main(int argc, char **argv)
-{
-	char *str;
-	int ret;
-	int fd;
-
-	str = NULL;
-  fd = open(argv[1], O_RDONLY);
-
-  while (get_next_line(fd, &str) != 0)
-		{
-			printf("\n[%s]\n", str);
-			free(str);
-		}
-
-  ft_putstr("\nEND OF FILE\n");
-	return (0);
-}
+#include "../get_next_line.h"
 
 int		reset_stock(char **line, char **stock)
 {
@@ -46,10 +27,11 @@ int		clean_stock(char **line, char **stock)
 	int		len;
 
 	len = ft_strlen(*stock);
-  *line = ft_strsub(*stock, 0, check_n(*stock));
+  *line = ft_strsub(*stock, 0, check_n(*stock)); // line = *\n[stock]
 	temp = *stock;
   printf("\n--STOCK\n%s--STOCK\n", temp); /*DEBUGGING*/
 	*stock = ft_strsub(*stock, check_n(*stock) + 1, len - check_n(*stock));
+	//delete the first line from stock.
 	free(temp);
 	return (1);
 }
@@ -63,17 +45,19 @@ int		get_next_line(const int fd, char **line)
 	if (fd < 0 || BUFF_SIZE <= 0)
 		return (-1);
 	if (!stock)
-  	stock = ft_strdup("");
+  		stock = ft_strdup("");
+
 	ret = 0;
+
 	while ((ret = read(fd, buf, BUFF_SIZE)) > 0)
 	{
 		buf[ret] = '\0';
     printf("\n--BUFFER\n%s--BUFFER\n", buf); /*DEBUGGING*/
-		stock = ft_strjoinf(stock, buf);
+		stock = ft_strjoinfree(stock, buf); // stock = buffer + stock
 		if (check_n(stock) != -1)
 			return (clean_stock(line, &stock));
 	}
-	if (ret == -1)
+	if (ret == -1) // if read() error.
 		return (-1);
 	if (check_n(stock) != -1)
 		return (clean_stock(line, &stock));
