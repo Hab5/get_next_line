@@ -59,9 +59,9 @@ int		get_next_line(const int fd, char **line)
 	}
 	if (ret == -1) // if read() error.
 		return (-1);
-	if (check_n(stock) != -1)
+	if (check_n(stock) != -1) // if (!stock(i)), clean and return.
 		return (clean_stock(line, &stock));
-	if (ft_strlen(stock) != 0)
+	if (ft_strlen(stock) != 0) // if there is something in stock, reset.
 		return (reset_stock(line, &stock));
 	return (0);
 }

@@ -13,11 +13,13 @@ int main(int argc, char **argv)
   	fd = open(argv[1], O_RDONLY);
 	while (get_next_line(fd, &str) != 0)
 	{
-		printf("[%s]\n", str);
+		//ft_putstr(str);
+        //ft_putstr("\n");
+        printf("[%s]\n", str);
 		free(str);
 	}
 
-  ft_putstr("\nEND OF FILE\n");
+  printf("\nEND OF FILE\n");
   close(fd);
 	return (0);
 }
