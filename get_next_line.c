@@ -1,15 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbellaic <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/11 23:30:08 by mbellaic          #+#    #+#             */
+/*   Updated: 2018/09/12 00:12:10 by mbellaic         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
-int		reset_stock(char **line, char **stock)
+int				reset_stock(char **line, char **stock)
 {
 	*line = *stock;
 	*stock = NULL;
 	return (1);
 }
 
-int		check_n(char *stock)
+int				check_n(char *stock)
 {
-	int		i;
+	int			i;
 
 	i = 0;
 	while (stock[i])
@@ -21,20 +33,20 @@ int		check_n(char *stock)
 	return (-1);
 }
 
-int		clean_stock(char **line, char **stock)
+int				clean_stock(char **line, char **stock)
 {
-	char	*temp;
-	int		len;
+	char		*temp;
+	int			len;
 
 	len = ft_strlen(*stock);
-  *line = ft_strsub(*stock, 0, check_n(*stock));
+	*line = ft_strsub(*stock, 0, check_n(*stock));
 	temp = *stock;
 	*stock = ft_strsub(*stock, check_n(*stock) + 1, len - check_n(*stock));
 	free(temp);
 	return (1);
 }
 
-int		get_next_line(const int fd, char **line)
+int				get_next_line(const int fd, char **line)
 {
 	int			ret;
 	char		buf[BUFF_SIZE + 1];
@@ -43,7 +55,7 @@ int		get_next_line(const int fd, char **line)
 	if (fd < 0 || BUFF_SIZE <= 0)
 		return (-1);
 	if (!stock)
-  	stock = ft_strdup("");
+		stock = ft_strdup("");
 	ret = 0;
 	while ((ret = read(fd, buf, BUFF_SIZE)) > 0)
 	{
