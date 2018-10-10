@@ -21,7 +21,7 @@
 # include <fcntl.h>
 # include <sys/stat.h>
 # include <unistd.h>
-# include "./libft/libft.h"
+# include "./libft/includes/libft.h"
 
 # define BUFF_SIZE 64
 

@@ -20,7 +20,7 @@ else
 endif
 
 CC=cc
-CFLAGS=-Wall -Wextra -Werror
+CFLAGS=-Wall -Wextra -Werror -I includes/
 SRC = 	ft_strlen.c \
 	  	ft_strdup.c \
 	  	ft_strcpy.c \
